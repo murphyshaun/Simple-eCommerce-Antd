@@ -1,0 +1,9 @@
+.itemCard,
+.itemCardBage {
+  margin: 8px;
+}
+
+.itemCardImage {
+  height: 150px !important;
+  object-fit: scale-down;
+}
