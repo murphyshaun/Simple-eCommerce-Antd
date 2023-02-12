@@ -1,8 +1,9 @@
-import { Menu } from "antd";
+import { Badge, Menu, Typography } from "antd";
 import React from "react";
 import "./index.css";
 import { HomeFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import Cart from "../Cart";
 function Header() {
   const navigate = useNavigate();
 
@@ -13,6 +14,7 @@ function Header() {
   return (
     <div className="header">
       <Menu
+        className="menu"
         onClick={handleMenuClick}
         mode="horizontal"
         items={[
@@ -70,6 +72,8 @@ function Header() {
           },
         ]}
       ></Menu>
+      <Typography.Title>Hoang Mai Market</Typography.Title>
+      <Cart />
     </div>
   );
 }

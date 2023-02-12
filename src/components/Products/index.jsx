@@ -1,17 +1,27 @@
-import { Badge, Card, Image, List, Rate, Typography } from "antd";
+import { Badge, Card, Image, List, Rate, Spin, Typography } from "antd";
 import React, { useEffect, useState } from "react";
-import { getAllProducts } from "../../api";
+import { useParams } from "react-router-dom";
+import { getAllProducts, getProductsByCategory } from "../../api";
 import AddToCard from "./component/AddToCard";
 import "./index.css";
 
 function Products() {
+  const [isLoading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
-
+  const { categoryId } = useParams();
   useEffect(() => {
-    getAllProducts().then((res) => {
-      setProducts(res.products);
-    });
-  }, []);
+    setLoading(true);
+    (categoryId ? getProductsByCategory(categoryId) : getAllProducts()).then(
+      (res) => {
+        setProducts(res.products);
+        setLoading(false);
+      }
+    );
+  }, [categoryId]);
+
+  if (isLoading) {
+    return <Spin spinning={isLoading} indicator="" />;
+  }
   return (
     <div>
       <List
